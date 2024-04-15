@@ -8,6 +8,13 @@ a = 3
 a1 = np.array([a/2, a*np.sqrt(3)/2])
 a2 = np.array([a, 0])
 
+m = 3
+n = 1
+
+if m < n:
+    print("m must bigger than n")
+    exit(1)
+
 vaccu = 20
 d = 3
 layer1_hight = 1
@@ -22,12 +29,7 @@ layer1 = {"C": [np.array([0, 0, vaccu/2+d+layer2_hight+layer1_hight/2]),
 
 layer2 = {"C": [np.array([0, 0, vaccu/2+layer2_hight/2]),
                 np.array([1/3, 1/3, vaccu/2+layer2_hight/2])]}
-m = 3
-n = 1
 
-if m < n:
-    print("m must bigger than n")
-    exit(1)
 
 N = max(m, n)**2
 
