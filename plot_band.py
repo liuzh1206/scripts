@@ -6,11 +6,11 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 plt.style.use('bmh')
-mpl.rcParams['text.usetex'] = False
-mpl.rcParams['font.family'] = 'sans-serif'  # 设置默认字体为无衬线字体
-mpl.rcParams['font.sans-serif'] = ['Arial']  # 设置无衬线字体为 Arial
-mpl.rcParams['mathtext.fontset'] = 'custom'  # 自定义数学符号的字体集
-mpl.rcParams['mathtext.rm'] = 'Arial'  # 设置数学符号的字体为 Arial
+mpl.rcParams['text.usetex'] = True
+# mpl.rcParams['font.family'] = 'sans-serif'  # 设置默认字体为无衬线字体
+# mpl.rcParams['font.sans-serif'] = ['Arial']  # 设置无衬线字体为 Arial
+# mpl.rcParams['mathtext.fontset'] = 'custom'  # 自定义数学符号的字体集
+# mpl.rcParams['mathtext.rm'] = 'Arial'  # 设置数学符号的字体为 Arial
 
 
 class BandPlotter:
@@ -100,16 +100,16 @@ class BandPlotter:
         K_labels = [i.split()[0] for i in data[1:-3]]
         for K_index, K_label in enumerate(K_labels):
             if K_label == 'GAMMA':
-                K_labels[K_index] = r'$\Gamma$'
+                K_labels[K_index] = r'$\mathbf\Gamma$'
             else:
-                K_labels[K_index] = r'' + K_label + r''
+                K_labels[K_index] = r'$\mathbf ' + K_label + r'$'
         return K_values, K_labels
 
     def plot(self):
         # plot fermi energy level
         E_fermi = self.load_fermi(os.path.join(self.path, 'FERMI_ENERGY'))
-        E_fermi = 0
-        fig = plt.figure(figsize=(9, 7))
+        # E_fermi = 0
+        fig = plt.figure(figsize=(11, 7))
         # fig.patch.set_facecolor('#FFFFFF')
         fig.patch.set_alpha(0)
         ax = fig.add_subplot(1, 1, 1)
@@ -142,7 +142,6 @@ class BandPlotter:
             for band in bands[1:]:
                 ax.plot(bands[0], band, color='black', alpha=1, lw=0.5)
                 pass
-
 
         with open('BAND_GAP', 'r') as f:
             n = f.readlines()[5]
@@ -223,8 +222,9 @@ class BandPlotter:
         ax.legend(pband_legend['orbit_lines'],
                   pband_legend['orbit_legends'], loc='best')
 
-        ax.set_ylabel(r'Energy(eV)', fontsize=25, verticalalignment='center')
-        # ax.set_ylabel(r'$Energy(eV)$', fontsize=30)
+        # ax.set_ylabel(r'Energy(eV)', fontsize=25, verticalalignment='center')
+        ax.set_ylabel(r'$\mathbf{Energy(eV)}$', fontsize=25, verticalalignment='bottom')
+
         bwith = 0.7
         ax.spines['bottom'].set_linewidth(bwith)  # 图框下边
         ax.spines['left'].set_linewidth(bwith)  # 图框左边
@@ -257,10 +257,12 @@ orbit_name_map = {
 'dxz': 9,
 'x2-y2': 10,
 'tot': 11
-            'SUM_T_DW': ['dxy', 'dyz', 'dz2', 'dxz', 'x2-y2'],
+            'SUM_T_DW': ['tot'],
+            'SUM_T_UP': ['tot'],
+            'SUM_H_DW': ['tot'],
+            'SUM_H_UP': ['tot'],
 }
 '''
-
 
 if __name__ == '__main__':
     bp = BandPlotter(
@@ -273,6 +275,6 @@ if __name__ == '__main__':
         },
         is_Spin=True)
     plt1 = bp.plot()
-    plt1.ylim(-1, 0.4)
+    plt1.ylim(-3, 3)
     plt1.savefig('band.png')
     plt1.show()
