@@ -1,20 +1,23 @@
 #!/bin/bash
-#SBATCH -J   efield                                         #指定作业名称
+#SBATCH -J   base                                         #指定作业名称
 #SBATCH --ntasks=128                                  #此次作业所需总核数
 #SBATCH --nodes=2                                   #作业所需节点数
 #SBATCH --ntasks-per-node=64                     #每个节点分配核数   
 #SBATCH -p low                                               #在low分区进行计算 
-#SBATCH --output=slurm-efield.log                                  #设置计算输出日志文件    
+#SBATCH --output=slurm-base.log                                  #设置计算输出日志文件    
 
 source /path/to/your/vasp/config/env.sh
+export PATH=/path/to/your/vaspkit/bin:${PATH}
 
 cd  $SLURM_SUBMIT_DIR
+
+export OMP_NUM_THREADS=1
 
 ulimit -s unlimited
 ulimit -l unlimited
 ulimit -d unlimited
 
-export OMP_NUM_THREADS=1
+srun hostname -s | sort -n >nodelist
 
 incar_opt="Global Parameters
 ISTART =  0            (Read existing wavefunction, if there)
@@ -234,7 +237,6 @@ DFT-D3 Correction
 IVDW    =  12           (DFT-D3 method of method with no damping)
 "
 
-srun hostname -s | sort -n >nodelist
 echo "$incar_opt" > INCAR
 echo "K-Spacing Value to Generate K-Mesh
 0

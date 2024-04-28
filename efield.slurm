@@ -6,18 +6,18 @@
 #SBATCH -p low                                               #在low分区进行计算 
 #SBATCH --output=slurm-efield.log                                  #设置计算输出日志文件    
 
+source /path/to/your/vasp/config/env.sh
+export PATH=/path/to/your/vaspkit/bin:${PATH}
+
 cd  $SLURM_SUBMIT_DIR
 
 export OMP_NUM_THREADS=1
-
-srun hostname -s | sort -n > nodelist
 
 ulimit -s unlimited
 ulimit -l unlimited
 ulimit -d unlimited
 
-source /path/to/your/vasp/config/env.sh
-export PATH=/path/to/your/vaspkit/bin:${PATH}
+srun hostname -s | sort -n > nodelist
 
 NCORE=8
 
