@@ -1,23 +1,21 @@
 #!/bin/bash
-#SBATCH -J   base                                         #指定作业名称
-#SBATCH --ntasks=128                                  #此次作业所需总核数
-#SBATCH --nodes=2                                   #作业所需节点数
-#SBATCH --ntasks-per-node=64                     #每个节点分配核数   
-#SBATCH -p low                                               #在low分区进行计算 
-#SBATCH --output=slurm-base.log                                  #设置计算输出日志文件    
+#SBATCH -J d_test                                            
+#SBATCH -N 1                                 
+#SBATCH -n 40                              
+#SBATCH -p cpu44c                                                
+#SBATCH --output=slurm-d.log                                     
 
-source /path/to/your/vasp/config/env.sh
-export PATH=/path/to/your/vaspkit/bin:${PATH}
+source /home/dell/wsy/app/vasp640/env.sh
+export PATH=/home/dell/wsy/app/vaspkit.1.4.0/bin/:$PATH
 
 cd  $SLURM_SUBMIT_DIR
-
-export OMP_NUM_THREADS=1
 
 ulimit -s unlimited
 ulimit -l unlimited
 ulimit -d unlimited
 
-srun hostname -s | sort -n >nodelist
+export OMP_NUM_THREADS=1
+
 
 incar_opt="Global Parameters
 ISTART =  0            (Read existing wavefunction, if there)
@@ -38,7 +36,7 @@ ADDGRID= .TRUE.        (Increase grid, helps GGA convergence)
 # NGXF    = 300        (FFT grid mesh density for nice charge/potential plots)
 # NGYF    = 300        (FFT grid mesh density for nice charge/potential plots)
 # NGZF    = 300        (FFT grid mesh density for nice charge/potential plots)
-
+ 
 Electronic Relaxation
 ISMEAR =  0            (Gaussian smearing, metals:1)
 SIGMA  =  0.05         (Smearing value in eV, metals:0.2)
@@ -46,7 +44,7 @@ NELM   =  90           (Max electronic SCF steps)
 NELMIN =  6            (Min electronic SCF steps)
 EDIFF  =  1E-6        (SCF energy convergence, in eV)
 # GGA  =  PS           (PBEsol exchange-correlation)
-
+ 
 Ionic Relaxation
 NSW    =  300          (Max ionic steps)
 IBRION =  2            (Algorithm: 0-MD, 1-Quasi-New, 2-CG)
@@ -59,7 +57,7 @@ Corrections to the potential and forces in VASP
 LDIPOL  =  .TRUE.       (Activate correction of the potential and forces)
 IDIPOL  =  3            (Direction of potential and forces)
 DIPOL = 0.5 0.5 0.5
-
+  
 DFT-D3 Correction
 IVDW    =  12           (DFT-D3 method of method with no damping)
 
@@ -85,7 +83,7 @@ LAECHG =  .TRUE.
 # NGXF    = 300        (FFT grid mesh density for nice charge/potential plots)
 # NGYF    = 300        (FFT grid mesh density for nice charge/potential plots)
 # NGZF    = 300        (FFT grid mesh density for nice charge/potential plots)
-
+ 
 Electronic Relaxation
 ISMEAR =  0            (Gaussian smearing, metals:1)
 SIGMA  =  0.05         (Smearing value in eV, metals:0.2)
@@ -94,14 +92,14 @@ NELMIN =  6            (Min electronic SCF steps)
 EDIFF  =  1E-08        (SCF energy convergence, in eV)
 # GGA  =  PS           (PBEsol exchange-correlation)
 # LORBIT =  11           (PAW radii for projected DOS)
-
+ 
 Ionic Relaxation
 NSW    =  0          (Max ionic steps)
 IBRION =  2            (Algorithm: 0-MD, 1-Quasi-New, 2-CG)
 ISIF   =  3            (Stress/relaxation: 2-Ions, 3-Shape/Ions/V, 4-Shape/Ions)
 EDIFFG = -2E-02        (Ionic convergence, eV/AA)
 # ALGO   =  Fast
-
+ 
 # Spin-Orbit Coupling Calculation
 # LSORBIT       = .TRUE.    (Activate SOC)
 # LNONCOLLINEAR = .TRUE.
@@ -111,12 +109,12 @@ EDIFFG = -2E-02        (Ionic convergence, eV/AA)
 # ISYM          =  -1       (Switch symmetry off)
 # SAXIS         =  0 0 1    (Direction of the magnetic field)
 # NBANDS        =  768      (Set this parameters manually, 2 * number of bands of collinear-run)
-
+ 
 Corrections to the potential and forces in VASP
 LDIPOL  =  .TRUE.       (Activate correction of the potential and forces)
 IDIPOL  =  3            (Direction of potential and forces)
 DIPOL = 0.5 0.5 0.5
-
+ 
 DFT-D3 Correction
 IVDW    =  12           (DFT-D3 method of method with no damping)
 "
@@ -139,7 +137,7 @@ ADDGRID= .TRUE.        (Increase grid, helps GGA convergence)
 # NGXF    = 300        (FFT grid mesh density for nice charge/potential plots)
 # NGYF    = 300        (FFT grid mesh density for nice charge/potential plots)
 # NGZF    = 300        (FFT grid mesh density for nice charge/potential plots)
-
+ 
 Electronic Relaxation
 ISMEAR =  0            (Gaussian smearing, metals:1)
 SIGMA  =  0.05         (Smearing value in eV, metals:0.2)
@@ -149,14 +147,14 @@ EDIFF  =  1E-08        (SCF energy convergence, in eV)
 # GGA  =  PS           (PBEsol exchange-correlation)
 LORBIT =  11           (PAW radii for projected DOS)
 # NEDOS  =  2001         (DOSCAR points)
-
+ 
 Ionic Relaxation
 NSW    =  0            (Max ionic steps)
 IBRION =  2            (Algorithm: 0-MD, 1-Quasi-New, 2-CG)
 ISIF   =  3            (Stress/relaxation: 2-Ions, 3-Shape/Ions/V, 4-Shape/Ions)
 EDIFFG = -2E-02        (Ionic convergence, eV/AA)
 # ALGO   =  Fast
-
+ 
 # Spin-Orbit Coupling Calculation
 # LSORBIT       = .TRUE.    (Activate SOC)
 # LNONCOLLINEAR = .TRUE.
@@ -166,12 +164,12 @@ EDIFFG = -2E-02        (Ionic convergence, eV/AA)
 # ISYM          =  -1       (Switch symmetry off)
 # SAXIS         =  0 0 1    (Direction of the magnetic field)
 NBANDS        =  210      (Set this parameters manually, 2 * number of bands of collinear-run)
-
+ 
 Corrections to the potential and forces in VASP
 LDIPOL  =  .TRUE.       (Activate correction of the potential and forces)
 IDIPOL  =  3            (Direction of potential and forces)
 DIPOL = 0.5 0.5 0.5
-
+  
 DFT-D3 Correction
 IVDW    =  12           (DFT-D3 method of method with no damping)
 
@@ -200,7 +198,7 @@ ADDGRID= .TRUE.        (Increase grid, helps GGA convergence)
 # NGXF    = 300        (FFT grid mesh density for nice charge/potential plots)
 # NGYF    = 300        (FFT grid mesh density for nice charge/potential plots)
 # NGZF    = 300        (FFT grid mesh density for nice charge/potential plots)
-
+ 
 Electronic Relaxation
 ISMEAR =  -5            (Gaussian smearing, metals:1)
 SIGMA  =  0.05         (Smearing value in eV, metals:0.2)
@@ -210,14 +208,14 @@ EDIFF  =  1E-08        (SCF energy convergence, in eV)
 # GGA  =  PS           (PBEsol exchange-correlation)
 LORBIT =  11           (PAW radii for projected DOS)
 NEDOS  =  2001         (DOSCAR points)
-
+ 
 Ionic Relaxation
 NSW    =  0           (Max ionic steps)
 IBRION =  2            (Algorithm: 0-MD, 1-Quasi-New, 2-CG)
 ISIF   =  3            (Stress/relaxation: 2-Ions, 3-Shape/Ions/V, 4-Shape/Ions)
 EDIFFG = -2E-02        (Ionic convergence, eV/AA)
 # ALGO   =  Fast
-
+ 
 #Spin-Orbit Coupling Calculation
 #LSORBIT       = .TRUE.    (Activate SOC)
 #LNONCOLLINEAR = .TRUE.
@@ -227,68 +225,32 @@ EDIFFG = -2E-02        (Ionic convergence, eV/AA)
 #ISYM          =  -1       (Switch symmetry off)
 #SAXIS         =  0 0 1    (Direction of the magnetic field)
 #NBANDS        =  768      (Set this parameters manually, 2 * number of bands of collinear-run)
-
+ 
 Corrections to the potential and forces in VASP
 LDIPOL  =  .TRUE.       (Activate correction of the potential and forces)
 IDIPOL  =  3            (Direction of potential and forces)
 DIPOL = 0.5 0.5 0.5
-
+ 
 DFT-D3 Correction
 IVDW    =  12           (DFT-D3 method of method with no damping)
 "
 
-echo "$incar_opt" > INCAR
-echo -e "102\n2\n0" | vaspkit > /dev/null
-echo "======================opt1 start========================="
-mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_gam > out
-tail OSZICAR
-tail OUTCAR
-echo "========================opt1 end========================="
+srun hostname -s | sort -n >nodelist
 
-cp CONTCAR POSCAR
+cp ../POSCAR .
 
-echo -e "102\n2\n0.04" | vaspkit > /dev/null
-echo "=======================opt start========================="
-mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
-tail OSZICAR
-tail OUTCAR
-echo "=========================opt end========================="
+for d in `seq 2.5 0.1 4.5`;do
+    [ ! -d $d ] && mkdir $d
+    cd $d
 
-cp CONTCAR scf/POSCAR
+    python ../distance.py ../POSCAR 14 $d
+    echo "$incar_scf" > INCAR
+    echo -e "102\n2\n0.03" | vaspkit > /dev/null
+    echo "======================$d start========================="
+    mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
+    tail OSZCAR
+    tail OUTCAR
+    echo "========================$d end========================="
 
-[ ! -d scf ] && mkdir scf
-cd scf
-echo "$incar_scf" > INCAR
-echo -e "102\n2\n0.03" | vaspkit > /dev/null
-echo "=======================scf start========================="
-mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
-tail OSZICAR
-tail OUTCAR
-echo "=======================scf start========================="
-
-
-[ ! -d band ] && mkdir band
-cd band
-echo "$incar_band" > INCAR
-cp ../POSCAR ../POTCAR ../WAVECAR ../CHGCAR .
-echo -e "302" | vaspkit > /dev/null
-sed -i "2c50" KPATH.in
-cp KPATH.in KPOINTS
-echo "======================band start========================="
-mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
-tail OSZICAR
-tail OUTCAR
-echo "=======================band end=========================="
-cd ..
-
-[ ! -d dos ] && mkdir dos
-cd dos
-echo "$incar_dos" > INCAR
-cp ../POSCAR ../POTCAR ../WAVECAR ../CHGCAR .
-echo -e "102\n2\n0.03" | vaspkit > /dev/null
-echo "=======================dos start========================="
-mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
-tail OSZICAR
-tail OUTCAR
-echo "========================dos end=========================="
-cd ..
+    cd ..
+done
