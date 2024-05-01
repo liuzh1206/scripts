@@ -2,11 +2,11 @@
 #SBATCH -J d_test                                            
 #SBATCH -N 1                                 
 #SBATCH -n 40                              
-#SBATCH -p cpu44c                                                
+#SBATCH -p node_name                                                
 #SBATCH --output=slurm-d.log                                     
 
-source /home/dell/wsy/app/vasp640/env.sh
-export PATH=/home/dell/wsy/app/vaspkit.1.4.0/bin/:$PATH
+source /path/to/your/vasp/evn/env.sh
+export PATH=/path/to/your/vaspkit/:$PATH
 
 cd  $SLURM_SUBMIT_DIR
 
