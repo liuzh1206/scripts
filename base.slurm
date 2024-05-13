@@ -254,10 +254,10 @@ tail OSZICAR
 tail OUTCAR
 echo "=========================opt end========================="
 
-cp CONTCAR scf/POSCAR
 
 [ ! -d scf ] && mkdir scf
 cd scf
+cp ../CONTCAR POSCAR
 echo "$incar_scf" > INCAR
 echo -e "102\n2\n0.03" | vaspkit > /dev/null
 echo "=======================scf start========================="
