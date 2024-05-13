@@ -256,8 +256,8 @@ echo "=========================opt end========================="
 
 
 [ ! -d scf ] && mkdir scf
+cp CONTCAR scf/POSCAR
 cd scf
-cp ../CONTCAR POSCAR
 echo "$incar_scf" > INCAR
 echo -e "102\n2\n0.03" | vaspkit > /dev/null
 echo "=======================scf start========================="
