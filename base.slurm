@@ -239,20 +239,20 @@ IVDW    =  12           (DFT-D3 method of method with no damping)
 
 echo "$incar_opt" > INCAR
 echo -e "102\n2\n0" | vaspkit > /dev/null
-echo "======================opt1 start========================="
+echo "=======================opt1 start at `date`========================="
 mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_gam > out
 tail OSZICAR
 tail OUTCAR
-echo "========================opt1 end========================="
+echo "=======================opt1  end  at `date`========================="
 
 cp CONTCAR POSCAR
 
 echo -e "102\n2\n0.04" | vaspkit > /dev/null
-echo "=======================opt start========================="
+echo "========================opt start at `date`========================="
 mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
 tail OSZICAR
 tail OUTCAR
-echo "=========================opt end========================="
+echo "========================opt  end  at `date`========================="
 
 
 [ ! -d scf ] && mkdir scf
@@ -260,11 +260,11 @@ cp CONTCAR scf/POSCAR
 cd scf
 echo "$incar_scf" > INCAR
 echo -e "102\n2\n0.03" | vaspkit > /dev/null
-echo "=======================scf start========================="
+echo "========================scf start at `date`========================="
 mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
 tail OSZICAR
 tail OUTCAR
-echo "=======================scf start========================="
+echo "========================scf  end  at `date`========================="
 
 
 [ ! -d band ] && mkdir band
@@ -274,11 +274,11 @@ cp ../POSCAR ../POTCAR ../WAVECAR ../CHGCAR .
 echo -e "302" | vaspkit > /dev/null
 sed -i "2c50" KPATH.in
 cp KPATH.in KPOINTS
-echo "======================band start========================="
+echo "======================band start at `date`=========================="
 mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
 tail OSZICAR
 tail OUTCAR
-echo "=======================band end=========================="
+echo "======================band  end  at `date`=========================="
 cd ..
 
 [ ! -d dos ] && mkdir dos
@@ -286,9 +286,9 @@ cd dos
 echo "$incar_dos" > INCAR
 cp ../POSCAR ../POTCAR ../WAVECAR ../CHGCAR .
 echo -e "102\n2\n0.03" | vaspkit > /dev/null
-echo "=======================dos start========================="
+echo "=======================dos start at `date`=========================="
 mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
 tail OSZICAR
 tail OUTCAR
-echo "========================dos end=========================="
+echo "=======================dos  end  at `date`=========================="
 cd ..

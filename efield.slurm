@@ -151,10 +151,11 @@ cp ../POSCAR .
 echo "$incar" > INCAR
 echo "EFIELD  =  $E" >> INCAR
 echo -e "102\n1\n0.03" | vaspkit > /dev/null
-echo "========================$E======================="
+echo ========================$E start at `date`=======================
 mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
 tail OSZICAR
 tail OUTCAR
+echo ========================$E  end  at `date`=======================
 
 [ ! -d band ] && mkdir band
 cd band
@@ -165,10 +166,11 @@ echo -e "302" | vaspkit > /dev/null
 sed -i "2c50" KPATH.in
 cp KPATH.in KPOINTS
 echo $E band 
-echo "=====================$E  band===================="
+echo ====================$E band start at `date`======================
 mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
 tail OSZICAR
 tail OUTCAR
+echo ====================$E band  end  at `date`======================
 
 cd ../..
 
@@ -179,10 +181,11 @@ cp ../POSCAR .
 echo "$incar" > INCAR
 echo -e "102\n1\n0.03" | vaspkit > /dev/null
 echo "EFIELD  =  -$E" >> INCAR
-echo "====================== n$E======================="
+echo ========================n$E start at `date`======================
 mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
 tail OSZICAR
 tail OUTCAR
+echo ========================n$E  end  at `date`======================
 
 [ ! -d band ] && mkdir band
 cd band
@@ -192,10 +195,11 @@ echo "EFIELD  =  -$E" >> INCAR
 echo -e "302" | vaspkit > /dev/null
 sed -i "2c50" KPATH.in
 cp KPATH.in KPOINTS
-echo "=================== n$E  band===================="
+echo ===================n$E band start at `date`======================
 mpirun    -np  $SLURM_NPROCS   -machinefile  $SLURM_SUBMIT_DIR/nodelist    vasp_std > out
 tail OSZICAR
 tail OUTCAR
+echo ===================n$E band  end  at `date`======================
 
 cd ../..
 
