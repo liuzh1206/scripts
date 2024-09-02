@@ -1,6 +1,7 @@
 #!/bin/env python
 
 import numpy as np
+import sys
 
 # import matplotlib.pyplot as plt
 
@@ -20,7 +21,9 @@ d = 3
 layer1_hight = 1
 layer2_hight = 1
 
-# dis = 6.65
+dis = 6.7
+if len(sys.argv) > 1:
+    dis = float(sys.argv[1])
 # d = dis - (layer1_hight + layer2_hight)/2
 
 layer1 = {"C": [np.array([0, 0, vaccu/2+d+layer2_hight+layer1_hight/2]),

@@ -62,13 +62,16 @@ class BandPlotter:
 
         if self.is_Spin:
             if atom_name.split('_')[1] == 'SUM':
-                atom_name = atom_name.split('_')[1] + '_' + atom_name.split('_')[2] + '_' + atom_name.split('_')[3]
+                atom_name = atom_name.split(
+                    '_')[1] + '_' + atom_name.split('_')[2] + '_' + atom_name.split('_')[3]
             else:
-                atom_name = atom_name.split('_')[1] + '_' + atom_name.split('_')[2]
+                atom_name = atom_name.split(
+                    '_')[1] + '_' + atom_name.split('_')[2]
                 pass
         else:
             if atom_name.split('_')[1] == 'SUM':
-                atom_name = atom_name.split('_')[1] + '_'+ atom_name.split('_')[2]
+                atom_name = atom_name.split(
+                    '_')[1] + '_' + atom_name.split('_')[2]
             else:
                 atom_name = atom_name.split('_')[1]
                 pass
@@ -223,7 +226,8 @@ class BandPlotter:
                   pband_legend['orbit_legends'], loc='best')
 
         # ax.set_ylabel(r'Energy(eV)', fontsize=25, verticalalignment='center')
-        ax.set_ylabel(r'$\mathbf{Energy(eV)}$', fontsize=25, verticalalignment='bottom')
+        ax.set_ylabel(r'$\mathbf{Energy(eV)}$',
+                      fontsize=25, verticalalignment='bottom')
 
         bwith = 0.7
         ax.spines['bottom'].set_linewidth(bwith)  # 图框下边
