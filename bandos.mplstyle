@@ -66,8 +66,11 @@ ytick.labelsize: 20
 ytick.left: False
 ytick.right: False
 
+# default color cycle
 axes.prop_cycle: cycler("color", ["#348ABD", "#A60628", "#7A68A6", "#467821", "#D55E00", "#CC79A7", "#56B4E9", "#009E73", "#F0E442", "#0072B2"])
 
+# default plot line width
 lines.linewidth: 2
 
+# default save fig dpi
 savefig.dpi: 300
