@@ -31,11 +31,11 @@ class DosPloter(object):
     def plot_dos(self):
         doss = np.loadtxt(os.path.join(self.path, 'TDOS.dat')).T
         if self.is_spin:
-            self.dos.append(self.ax.plot(doss[1], doss[0])[0])
-            self.dos.append(self.ax.plot(doss[2], doss[0])[0])
+            self.dos.append(self.ax.plot(doss[1], doss[0], label='dos_up')[0])
+            self.dos.append(self.ax.plot(doss[2], doss[0], label='dos_dw')[0])
             pass
         else:
-            self.dos.append(self.ax.plot(doss[1], doss[0])[0])
+            self.dos.append(self.ax.plot(doss[1], doss[0], label='dos')[0])
             pass
         return
 
