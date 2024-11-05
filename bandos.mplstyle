@@ -1,0 +1,73 @@
+
+# font.family: sans-serif
+font.family: serif
+font.serif: Times
+font.sans-serif: Arial
+
+
+# Use LaTeX for math formatting
+text.usetex: True
+
+# Latex with sans-serif fonts
+
+mathtext.fontset: custom  # Should be 'dejavusans' (default),
+                               # 'dejavuserif', 'cm' (Computer Modern), 'stix',
+                               # 'stixsans' or 'custom'
+## "mathtext.fontset: custom" is defined by the mathtext.bf, .cal, .it, ...
+## settings which map a TeX font name to a fontconfig font pattern.  (These
+## settings are not used for other font sets.)
+
+# In general, we need to be careful with the preamble. A common font for
+# sans serif LaTeX is cmbright. However, it does not support bold fontweights
+# so we use sfmath instead. 
+# text.latex.preamble : \usepackage{amsmath} \usepackage{amssymb} \usepackage{sfmath}
+# text.latex.preamble : \usepackage{amsmath} \usepackage{amssymb} \usepackage{cmbright}
+
+mathtext.bf:  sans:bold
+mathtext.bfit: sans:italic:bold
+mathtext.cal: cursive
+mathtext.it:  sans:italic
+mathtext.rm:  sans
+mathtext.sf:  sans
+mathtext.tt:  monospace
+
+figure.figsize: 6, 4
+figure.subplot.left: 0.17
+figure.subplot.right: 0.97
+figure.subplot.bottom: 0.1
+figure.subplot.top: 0.95
+# figure.subplot.wspace: 0.1
+# figure.subplot.hspace: 0.1
+
+axes.labelsize: 25
+axes.labelcolor: black
+axes.labelpad: 0
+
+# boder
+axes.spines.left:   True  # display axis spines
+axes.spines.bottom: True
+axes.spines.top:    True
+axes.spines.right:  True
+axes.linewidth: 1
+axes.edgecolor: black
+
+axes.xmargin: 0.1
+axes.ymargin: 0.1
+axes.zmargin: 0.1
+
+xaxis.labellocation: center
+yaxis.labellocation: center
+
+xtick.labelsize: 20
+xtick.top: False
+xtick.bottom: False
+
+ytick.labelsize: 20
+ytick.left: False
+ytick.right: False
+
+axes.prop_cycle: cycler("color", ["#348ABD", "#A60628", "#7A68A6", "#467821", "#D55E00", "#CC79A7", "#56B4E9", "#009E73", "#F0E442", "#0072B2"])
+
+lines.linewidth: 2
+
+savefig.dpi: 300
