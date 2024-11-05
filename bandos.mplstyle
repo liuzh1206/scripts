@@ -32,14 +32,14 @@ mathtext.sf:  sans
 mathtext.tt:  monospace
 
 figure.figsize: 6, 4
-figure.subplot.left: 0.17
+figure.subplot.left: 0.20
 figure.subplot.right: 0.97
 figure.subplot.bottom: 0.1
 figure.subplot.top: 0.95
 # figure.subplot.wspace: 0.1
 # figure.subplot.hspace: 0.1
 
-axes.labelsize: 25
+axes.labelsize: 30
 axes.labelcolor: black
 axes.labelpad: 0
 
@@ -58,11 +58,11 @@ axes.zmargin: 0.1
 xaxis.labellocation: center
 yaxis.labellocation: center
 
-xtick.labelsize: 20
+xtick.labelsize: 25
 xtick.top: False
 xtick.bottom: False
 
-ytick.labelsize: 20
+ytick.labelsize: 25
 ytick.left: False
 ytick.right: False
 
