@@ -81,7 +81,7 @@ class BandPloter(object):
             bands = np.loadtxt(os.path.join(
                 self.path, 'REFORMATTED_BAND.dat')).T
             for index, band in enumerate(bands[1:]):
-                self.bands_dw.append(
+                self.bands.append(
                     self.ax.plot(
                         bands[0], band,
                         color='black',
@@ -104,7 +104,7 @@ class BandPloter(object):
                 self.pbands[atom][orbit] = self.ax.scatter(
                     x=bands['#K-Path'], y=bands['Energy'],
                     s=bands[orbit]*self.scale,
-                    label=atom+orbit
+                    label=f'{atom} {orbit}'
                 )
                 pass
             pass

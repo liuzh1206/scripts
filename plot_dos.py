@@ -69,7 +69,7 @@ class DosPloter(object):
                 for orbit in self.atoms[atom]:
                     self.pdoss[atom][orbit] = self.ax.plot(
                         pdoss[orbit], pdoss['#Energy'],
-                        label=atom+orbit
+                        label=f'{atom} {orbit}'
                     )[0]
                     pass
                 pass
