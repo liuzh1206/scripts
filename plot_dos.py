@@ -51,7 +51,7 @@ class DosPloter(object):
                 for orbit in self.atoms[atom]:
                     self.pdoss[atom][orbit] = self.ax.plot(
                         pdoss[orbit], pdoss['#Energy'],
-                        label=atom+orbit
+                        label=f'{atom} {orbit}'
                     )[0]
                     pass
                 pass
@@ -60,7 +60,7 @@ class DosPloter(object):
                 for orbit in self.atoms[atom]:
                     self.pdoss[atom][orbit] = self.ax.plot(
                         pdoss[orbit], pdoss['#Energy'],
-                        label=atom+orbit
+                        label=f'{atom} {orbit}'
                     )[0]
                     pass
                 pass
@@ -88,6 +88,15 @@ class DosPloter(object):
 
         return
 
+    def legend(self, **kwargs):
+        handles = []
+        for atom in self.pdoss:
+            for orbit in self.pdoss[atom]:
+                handles.append(self.pdoss[atom][orbit])
+                pass
+            pass
+        self.plt.legend(handles=handles, **kwargs)
+
     def get_plt(self):
         return self.plt
 
@@ -100,6 +109,7 @@ class DosPloter(object):
     pass
 
 
+# orbit name, you can find it at first line in PDOS.dat file
 # s py pz px dxy dyz dz2 dxz dx2 fy3x2 fxyz fyz2 fz3 fxz2 fzx2 fx3 tot
 if __name__ == '__main__':
     dp = DosPloter(
@@ -109,11 +119,11 @@ if __name__ == '__main__':
         is_spin=True,
         style='bandos',
     )
-
-    dp.ax.set_ylim(-0.4, 0.4)
     dp.ax.set_xlim(-3, 3)
+    dp.ax.set_ylim(-0.4, 0.4)
     dp.plot()
     dp.set_dos_color(['green', 'blue'])
+    dp.legend(loc='upper right')
 
     dp.plt.savefig('dos.tiff')
     dp.plt.show()

@@ -125,6 +125,15 @@ class BandPloter(object):
             pass
         return
 
+    def legend(self, **kwargs):
+        handles = []
+        for atom in self.pbands:
+            for orbit in self.pbands[atom]:
+                handles.append(self.pbands[atom][orbit])
+                pass
+            pass
+        self.plt.legend(handles=handles, **kwargs)
+
     def get_plt(self):
         return self.plt
 
@@ -137,6 +146,7 @@ class BandPloter(object):
     pass
 
 
+# orbit name, you can find it at first line in PBAND.dat file
 # s py pz px dxy dyz dz2 dxz x2-y2 fy3x2 fxyz fyz2 fz3 fxz2 fzx2 fx3 tot
 if __name__ == '__main__':
     bp = BandPloter(
@@ -151,6 +161,7 @@ if __name__ == '__main__':
     bp.ax.set_ylim(-0.4, 0.4)
     bp.plot()
     bp.set_band_color(['green', 'blue'])
+    bp.legend(loc='upper right')
 
     bp.plt.savefig('band.tiff')
     bp.plt.show()
